@@ -4,6 +4,17 @@ import os, socket
 PASSWORD = "clave123"                    # <-- cámbiala
 WHITELIST = ["sleep", "gedit", "python"] # <-- comandos permitidos
 
+
+def recvline(conn):
+    data = b""
+    while not data.endswith(b"\n"):
+        chunk = conn.recv(1)
+        if not chunk:
+            break
+        data += chunk
+    return data.decode().strip()
+
+
 def listar():
     os.system("ps -eo pid,comm | head")
 
@@ -52,6 +63,7 @@ while True:
 
 
     conn.close()
+
 
 
 
