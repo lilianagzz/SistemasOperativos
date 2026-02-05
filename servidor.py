@@ -21,9 +21,6 @@ def iniciar(conn):
 
 def detener(conn):
     pid = conn.recv(20).decode().strip()
-    print("Password recibida (repr):", repr(pwd))        # <-- agrega esta línea
-    print("Password esperada (repr):", repr(PASSWORD))
-
     os.system("kill " + pid)
 
 server = socket.socket()
@@ -36,7 +33,11 @@ while True:
     print("Conexión de:", addr) 
     # 1) Autenticación simple
     pwd = conn.recv(64).decode().strip()
-    print("Password recibida:", "*"*len(pwd))
+    print("Password recibida (len):", len(pwd))
+    print("Password esperada (len):", len(PASSWORD))
+    print("Password recibida (repr):", repr(pwd))        # <-- agrega esta línea
+    print("Password esperada (repr):", repr(PASSWORD)) 
+
     if pwd != PASSWORD:
         print("Password incorrecta. Cerrando.")
         conn.close()
@@ -51,6 +52,7 @@ while True:
 
 
     conn.close()
+
 
 
 
