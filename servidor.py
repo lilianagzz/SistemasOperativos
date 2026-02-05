@@ -16,7 +16,7 @@ def recvline(conn):
 
 
 def listar():
-    os.system("ps -eo pid,comm | head -n 100")
+    os.system("ps -eo pid,comm | tail -n 30")
 
 def iniciar(conn):
     cmd = recvline(conn)              
@@ -63,6 +63,7 @@ while True:
 
 
     conn.close()
+
 
 
 
