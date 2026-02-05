@@ -24,7 +24,7 @@ def detener(conn):
     os.system("kill " + pid)
 
 server = socket.socket()
-server.bind(("0.0.0.0", 5000))  # para LAN; para una sola PC usa ("127.0.0.1", 5000)
+server.bind(("127.0.0.1", 5000))  # para LAN; para una sola PC usa ("127.0.0.1", 5000)
 server.listen(5)
 print("Servidor listo...")
 
@@ -42,5 +42,6 @@ while True:
     if op == "1": listar()
     elif op == "2": iniciar(conn)
     elif op == "3": detener(conn)
+
 
     conn.close()
