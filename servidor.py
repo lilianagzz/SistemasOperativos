@@ -33,20 +33,24 @@ print("Servidor listo...")
 
 while True:
     conn, addr = server.accept()
-
+    print("Conexión de:", addr) 
     # 1) Autenticación simple
     pwd = conn.recv(64).decode().strip()
+    print("Password recibida:", "*"*len(pwd))
     if pwd != PASSWORD:
+        print("Password incorrecta. Cerrando.")
         conn.close()
         continue
 
     # 2) Operación
     op = conn.recv(8).decode().strip()
+    print("Operación:", op)
     if op == "1": listar()
     elif op == "2": iniciar(conn)
     elif op == "3": detener(conn)
 
 
     conn.close()
+
 
 
