@@ -8,7 +8,7 @@ def listar():
     os.system("ps -eo pid,comm | head")
 
 def iniciar(conn):
-    cmd = conn.recv(100).decode().strip()
+    cmd = recvline(conn)              
     ok = False
     for w in WHITELIST:
         if cmd == w or cmd.startswith(w + " "):
@@ -20,7 +20,7 @@ def iniciar(conn):
         print("Bloqueado por whitelist:", cmd)
 
 def detener(conn):
-    pid = conn.recv(20).decode().strip()
+    pid = recvline(conn) 
     os.system("kill " + pid)
 
 server = socket.socket()
@@ -32,7 +32,7 @@ while True:
     conn, addr = server.accept()
     print("Conexión de:", addr) 
     # 1) Autenticación simple
-    pwd = conn.recv(64).decode().strip()
+    pwd = recvline(conn)
     print("Password recibida (len):", len(pwd))
     print("Password esperada (len):", len(PASSWORD))
     print("Password recibida (repr):", repr(pwd))        # <-- agrega esta línea
@@ -44,7 +44,7 @@ while True:
         continue
 
     # 2) Operación
-    op = conn.recv(8).decode().strip()
+    op = recvline(conn)
     print("Operación:", op)
     if op == "1": listar()
     elif op == "2": iniciar(conn)
@@ -52,6 +52,7 @@ while True:
 
 
     conn.close()
+
 
 
 
