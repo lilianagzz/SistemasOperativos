@@ -21,10 +21,13 @@ def iniciar(conn):
 
 def detener(conn):
     pid = conn.recv(20).decode().strip()
+    print("Password recibida (repr):", repr(pwd))        # <-- agrega esta línea
+    print("Password esperada (repr):", repr(PASSWORD)
+
     os.system("kill " + pid)
 
 server = socket.socket()
-server.bind(("127.0.0.1", 5000))  # para LAN; para una sola PC usa ("127.0.0.1", 5000)
+server.bind(("127.0.0.1", 5000))  # para una sola PC usa ("127.0.0.1", 5000)
 server.listen(5)
 print("Servidor listo...")
 
@@ -45,3 +48,4 @@ while True:
 
 
     conn.close()
+
