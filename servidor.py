@@ -22,7 +22,7 @@ def iniciar(conn):
 def detener(conn):
     pid = conn.recv(20).decode().strip()
     print("Password recibida (repr):", repr(pwd))        # <-- agrega esta línea
-    print("Password esperada (repr):", repr(PASSWORD)
+    print("Password esperada (repr):", repr(PASSWORD))
 
     os.system("kill " + pid)
 
@@ -48,4 +48,5 @@ while True:
 
 
     conn.close()
+
 
